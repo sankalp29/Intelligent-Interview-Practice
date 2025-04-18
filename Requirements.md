@@ -1,4 +1,4 @@
-#Functional Requirements:
+# Functional Requirements:
 1) Candidates log in using gmail.com, github.com, outlook.com or work email id.
 
 2) Candidate selects the difficulty level of the interview (L), number of questions (N), length of the round (T).
@@ -21,7 +21,7 @@
 
 
 
-#Non-functional Requirements:
+# Non-functional Requirements:
 
 1) Availability: The platform should be available 99.5% of the time.
 

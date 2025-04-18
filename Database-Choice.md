@@ -4,13 +4,13 @@ User Details: Username, Password, Signup Date, Number of tests attended
 
 Interview Details: Questions asked, Code written for each question, Feedback and rating for each code.
 
-#SQL vs NoSQL
+**SQL vs NoSQL**
 
 Let's look at how the data would be stored in both the scenarios.
 
 First up, SQL:
 
-# Users Table
+**Users Table**
 | Column Name             | Data Type        | Constraints                | Description                                  |
 |-------------------------|------------------|----------------------------|----------------------------------------------|
 | `UserID`                | INT              | PRIMARY KEY AUTO_INCREMENT | Unique identifier for each user              |
@@ -20,7 +20,7 @@ First up, SQL:
 | `NumberOfTestsAttended` | INT              | DEFAULT 0                  | Count of tests the user has completed        |
 
 
-# Interviews Table
+**Interviews Table**
 | Column Name        | Data Type         | Constraints                                  | Description                                                  |
 |--------------------|-------------------|----------------------------------------------|--------------------------------------------------------------|
 | `InterviewID`      | INT               | PRIMARY KEY AUTO_INCREMENT                   | Unique identifier for each interview                         |
@@ -34,7 +34,7 @@ First up, SQL:
 | `SubmissionTime`   | TIMESTAMP         |                                              | Time when the user submitted the entire interview            |
 
 
-# QuestionSubmissions Table
+**QuestionSubmissions Table**
 | Column Name           | Data Type         | Constraints                                                  | Description                                                              |
 |-----------------------|-------------------|--------------------------------------------------------------|--------------------------------------------------------------------------|
 | `SubmissionID`        | INT               | PRIMARY KEY AUTO_INCREMENT                                   | Unique identifier for each question submission within an interview       |

@@ -4,11 +4,11 @@ User Details: Username, Password, Signup Date, Number of tests attended
 
 Interview Details: Questions asked, Code written for each question, Feedback and rating for each code.
 
-**SQL vs NoSQL**
+## SQL vs NoSQL
 
 Let's look at how the data would be stored in both the scenarios.
 
-First up, SQL:
+### SQL:
 
 **Users Table**
 | Column Name             | Data Type        | Constraints                | Description                                  |
@@ -45,4 +45,34 @@ First up, SQL:
 | `Feedback`            | TEXT              |                                                              | Feedback provided by the AI for this code                                |
 | `Rating`              | DECIMAL(3, 1)     | NOT NULL                                                     | Rating given by the AI for the code (on a scale of 10, e.g., 7.5)        |
 
+##
 
+### NoSQL
+
+If we closely look at the data we want to store, it is Interview Details of a user for all interviews user has attended.
+The interview details as discussed above, comprise: Questions asked, Code written for each question, Feedback and rating for each code.
+All this data is related and always fetched together and can be understood as a document containing all the information that is fetched when a user requests for his past interview data.
+
+How would the document based data be structured?
+<pre>
+  { 
+    "userId": "123", 
+    "username": "john_doe", 
+    "interviews": [ 
+            { 
+              "interviewId": "i-456", 
+              "timestamp": "2024-04-17T10:00:00Z", 
+              "question": { "...": "..." }, 
+              "code": { "...": "..." }, 
+              "feedback": { "...": "..." }, 
+              "rating": 8 
+            } 
+      ] 
+  } 
+</pre>
+
+### Why can MongoDB suit well for this use case?
+1. **Single Document Fetch**: The embedded document structure in the interviews collection allows us to retrieve all details of a user's past interview (questions, code, feedback, ratings) with a single query based on the `userId`. This is more efficient than SQL, which requires joins between tables.
+2. By creating an index on the `userId` field in the interviews collection, MongoDB can quickly locate the specific documents belonging to a particular user without having to scan the entire collection. This can significantly speed up the retrieval process.
+3. **Schema Flexibility**: MongoDB's schema-less nature allows you to easily add new fields or modify the structure of documents in the interviews collection in the future without requiring rigid schema migrations. This can be beneficial if your platform evolves with new features or data points.
+4. **Alignment with Data Structure**: The hierarchical nature of an interview object (containing multiple questions) maps naturally to the embedded array of documents within a MongoDB document, making the data model more intuitive.

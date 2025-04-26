@@ -7,43 +7,44 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6; /* Light grey background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-image: url('https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-repeat: no-repeat;
             min-height: 100vh;
             margin: 0;
+            display: flex;
+            justify-content: flex-start; /* Change to flex-start */
+            align-items: center;
         }
 
         .login-container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 50px;
             width: 400px;
             text-align: left;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-left: 50px; /* Add some left margin */
         }
 
         h1 {
-            color: #2c3e50; /* Dark blue-grey heading */
+            color: #ffffff;
             margin-bottom: 12px;
             font-size: 28px;
             font-weight: 600;
         }
 
         p {
-            color: #7f8c8d; /* Medium grey paragraph */
+            color: #eeeeee;
             font-size: 16px;
             margin-bottom: 30px;
         }
 
-        .input-group {
-            margin-bottom: 20px;
-        }
-
         .input-group label {
             display: block;
-            color: #34495e; /* Darker grey label */
+            color: #ffffff;
             font-size: 14px;
             margin-bottom: 8px;
             font-weight: bold;
@@ -53,14 +54,21 @@
         .input-group input[type="password"] {
             width: 100%;
             padding: 14px;
-            border: 1px solid #bdc3c7; /* Light grey border */
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+        }
+
+        .input-group input::placeholder {
+            color: #fff;
+            opacity: 0.6;
         }
 
         .login-button {
-            background-color: #27ae60; /* Emerald green button (can be adjusted) */
+            background-color: #27ae60;
             color: white;
             padding: 16px 20px;
             border: none;
@@ -71,29 +79,30 @@
             transition: background-color 0.3s ease;
             margin-top: 30px;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .login-button:hover {
-            background-color: #219653; /* Darker emerald green on hover */
+            background-color: #219653;
         }
 
         .forgot-password a {
-            color: #7f8c8d; /* Medium grey, same as paragraph text */
+            color: #ddd;
             text-decoration: none;
-            font-size: 14px; /* Smaller font size */
+            font-size: 14px;
+            margin-top: 20px;
+            display: block;
         }
 
         .forgot-password a:hover {
             text-decoration: underline;
-            color: #546e7a; /* Slightly darker grey on hover */
+            color: white;
         }
 
         .separator {
             display: flex;
             align-items: center;
             text-align: center;
-            color: #95a5a6; /* Light grey-blue separator text */
+            color: #aaa;
             margin: 35px 0;
         }
 
@@ -101,12 +110,12 @@
         .separator::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #d2d7d3; /* Lighter grey separator line */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .separator span {
             padding: 0 15px;
-            background-color: #fff;
+            background-color: transparent;
         }
 
         .social-login-buttons {
@@ -121,16 +130,17 @@
             justify-content: center;
             align-items: center;
             padding: 14px;
-            border: 1px solid #d2d7d3; /* Lighter grey border */
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 8px;
             text-decoration: none;
-            color: #34495e; /* Darker grey text */
+            color: #fff;
             font-size: 14px;
             transition: border-color 0.3s ease;
+            background-color: #fff;
         }
 
         .social-button:hover {
-            border-color: #95a5a6;
+            border-color: white;
         }
 
         .social-button img {
@@ -139,21 +149,35 @@
             vertical-align: middle;
         }
 
+        .social-login-buttons a:nth-child(1) {
+            color: #000;
+        }
+
+        .social-login-buttons a:nth-child(2) {
+            color: #0077b5;
+        }
+
         .signup-link {
             text-align: center;
             margin-top: 40px;
             font-size: 16px;
-            color: #7f8c8d;
+            color: #ffffff;
         }
 
         .signup-link a {
-            color: #3498db; /* Blue link */
+            color: #f5f5f5;
             text-decoration: none;
             font-weight: bold;
         }
 
         .signup-link a:hover {
             text-decoration: underline;
+            color: #fff;
+        }
+
+        .background-design,
+        .background-content {
+            display: none;
         }
     </style>
 </head>
@@ -167,7 +191,7 @@
             <input type="text" id="email" name="email" placeholder="Enter your email address">
         </div>
 
-        <div class="input-group">
+        <div class="input-group" style="margin-top: 20px;">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password">
         </div>
@@ -181,17 +205,9 @@
         <div class="separator"><span>or</span></div>
 
         <div class="social-login-buttons">
-            <!-- <a href="/oauth2/authorization/google" class="social-button" style="justify-content: center;">
-                <img src="/static/assets/google_icon.png" alt="Google" style="max-height: 22px; margin-right: 10px; vertical-align: middle;">
-                <span>Continue with Google</span>
-            </a> -->
             <a href="/oauth2/authorization/google" class="social-button" style="justify-content: center;">
-                <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s96-fcrop64=1,00000000ffffffff-rw" alt="Google" style="max-height: 22px; margin-right: 10px; vertical-align: middle;">
-                <span>Continue with Google</span>
-            </a>
-            <a href="#" class="social-button">
-                <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" alt="Linkedin">
-                <span>LinkedIn</span>
+                <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s96-fcrop64=1,00000000ffffffff-rw" alt="Google" style="max-height: 24px; margin-right: 10px; vertical-align: middle;">
+                <span style="color:#000;">Sign in with Google</span>
             </a>
         </div>
 

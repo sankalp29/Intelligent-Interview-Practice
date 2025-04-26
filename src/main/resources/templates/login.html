@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Intelligent Interview Platform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            width: 400px;
+            text-align: left;
+        }
+
+        h1 {
+            color: #2c3e50; /* Dark blue-grey heading */
+            margin-bottom: 12px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #7f8c8d; /* Medium grey paragraph */
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #34495e; /* Darker grey label */
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #bdc3c7; /* Light grey border */
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .login-button {
+            background-color: #27ae60; /* Emerald green button (can be adjusted) */
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-button:hover {
+            background-color: #219653; /* Darker emerald green on hover */
+        }
+
+        .forgot-password a {
+            color: #7f8c8d; /* Medium grey, same as paragraph text */
+            text-decoration: none;
+            font-size: 14px; /* Smaller font size */
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+            color: #546e7a; /* Slightly darker grey on hover */
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #95a5a6; /* Light grey-blue separator text */
+            margin: 35px 0;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #d2d7d3; /* Lighter grey separator line */
+        }
+
+        .separator span {
+            padding: 0 15px;
+            background-color: #fff;
+        }
+
+        .social-login-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-button {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 14px;
+            border: 1px solid #d2d7d3; /* Lighter grey border */
+            border-radius: 8px;
+            text-decoration: none;
+            color: #34495e; /* Darker grey text */
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .social-button:hover {
+            border-color: #95a5a6;
+        }
+
+        .social-button img {
+            max-height: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        .signup-link a {
+            color: #3498db; /* Blue link */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Welcome back!</h1>
+        <p>Login to your account</p>
+
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email address">
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+        </div>
+
+        <div class="forgot-password">
+            <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="login-button">Log In</button>
+
+        <div class="separator"><span>or</span></div>
+
+        <div class="social-login-buttons">
+            <!-- <a href="/oauth2/authorization/google" class="social-button" style="justify-content: center;">
+                <img src="/static/assets/google_icon.png" alt="Google" style="max-height: 22px; margin-right: 10px; vertical-align: middle;">
+                <span>Continue with Google</span>
+            </a> -->
+            <a href="/oauth2/authorization/google" class="social-button" style="justify-content: center;">
+                <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s96-fcrop64=1,00000000ffffffff-rw" alt="Google" style="max-height: 22px; margin-right: 10px; vertical-align: middle;">
+                <span>Continue with Google</span>
+            </a>
+            <a href="#" class="social-button">
+                <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" alt="Linkedin">
+                <span>LinkedIn</span>
+            </a>
+        </div>
+
+        <div class="signup-link">
+            Don't have an account? <a href="/signup">Sign up</a>
+        </div>
+    </div>
+</body>
+</html>

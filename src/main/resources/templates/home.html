@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Home Page</title>
+    </head>
+    <body>
+        <h1>Welcome Home!</h1>
+
+        <div th:if="${name}">
+            <p>Name: <span th:text="${name}"></span></p>
+            <p>Email: <span th:text="${email}"></span></p>
+            <img th:src="${picture}" alt="Profile Picture" width="100" height="100"/>
+        </div>
+    </body>
+</html>

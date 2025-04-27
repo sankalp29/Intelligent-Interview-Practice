@@ -1,15 +1,217 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Home Page</title>
-    </head>
-    <body>
-        <h1>Welcome Home!</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Interview Platform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-        <div th:if="${name}">
-            <p>Name: <span th:text="${name}"></span></p>
-            <p>Email: <span th:text="${email}"></span></p>
-            <img th:src="${picture}" alt="Profile Picture" width="100" height="100"/>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        header .auth-button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            margin-left: -20px;
+            margin-right: 40px;
+        }
+
+        header .auth-button:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        header .profile-icon {
+            font-size: 24px;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        header .profile-icon:hover {
+            color: #2c3e50;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        main .text-container {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 90%;
+        }
+
+        main h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        main p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            max-width: 800px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        main .start-practicing-button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 22px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+            font-weight: bold;
+            width: 250px;
+        }
+
+        main .start-practicing-button:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.05);
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            main h1 { font-size: 36px; }
+            main p { font-size: 18px; }
+            main .start-practicing-button { font-size: 18px; padding: 12px 25px; }
+            header .logo { font-size: 20px; }
+            header .auth-button { font-size: 14px; padding: 8px 12px; }
+        }
+
+        @media (max-width: 480px) {
+            main h1 { font-size: 28px; }
+            main p { font-size: 16px; }
+            main .start-practicing-button { font-size: 16px; padding: 10px 20px; }
+            header .logo { font-size: 18px; }
+            header .auth-button { font-size: 12px; padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Intelligent Interview Platform</div>
+        <div id="auth-area"></div>
+    </header>
+
+    <main>
+        <div class="text-container">
+            <h1>Hone your skills.</h1>
+            <p>Practice like a real interview. Get evaluated by AI. Get actionable insights to improve.</p>
         </div>
-    </body>
+        <div id="start-button-area"></div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Intelligent Interview Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simulate login status
+        const loggedIn = false; // <-- change this to true or false for testing
+
+        const authArea = document.getElementById('auth-area');
+        const startButtonArea = document.getElementById('start-button-area');
+        const yearSpan = document.getElementById('year');
+
+        if (loggedIn) {
+            authArea.innerHTML = `
+                <a href="/dashboard">
+                    <span class="profile-icon">&#128100;</span>
+                </a>
+            `;
+            startButtonArea.innerHTML = `
+                <a href="/start-practicing">
+                    <button class="start-practicing-button">Start Practicing</button>
+                </a>
+            `;
+        } else {
+            authArea.innerHTML = `
+                <a href="/login">
+                    <button class="auth-button">Log In</button>
+                </a>
+            `;
+            startButtonArea.innerHTML = `
+                <a href="/login">
+                    <button class="start-practicing-button">Start Practicing</button>
+                </a>
+            `;
+        }
+
+        // Set the footer year dynamically
+        yearSpan.textContent = new Date().getFullYear();
+    </script>
+
+</body>
 </html>

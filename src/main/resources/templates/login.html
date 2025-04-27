@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-image: url('https://images.pexels.com/photos/392018/pexels-photo-392018.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
             background-size: cover;
             background-repeat: no-repeat;
             min-height: 100vh;
             margin: 0;
             display: flex;
-            justify-content: flex-start; /* Change to flex-start */
+            justify-content: flex-start;
             align-items: center;
         }
 
@@ -26,7 +26,7 @@
             text-align: left;
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-left: 50px; /* Add some left margin */
+            margin-left: 50px;
         }
 
         h1 {
@@ -164,20 +164,70 @@
             color: #ffffff;
         }
 
+        .signup-link span {
+            color: #cccccc;
+        }
+
         .signup-link a {
-            color: #f5f5f5;
+            color: #ffffff;
             text-decoration: none;
             font-weight: bold;
         }
 
         .signup-link a:hover {
             text-decoration: underline;
-            color: #fff;
+            color: #b0bec5;
         }
 
         .background-design,
         .background-content {
             display: none;
+        }
+
+        .offerings-container {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 400px;
+            text-align: left;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-left: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .offerings-container h2 {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .offerings-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .offerings-container li {
+            color: #eeeeee;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .offerings-container li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #27ae60;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -185,35 +235,38 @@
     <div class="login-container">
         <h1>Welcome back!</h1>
         <p>Login to your account</p>
-
         <div class="input-group">
             <label for="email">Email</label>
             <input type="text" id="email" name="email" placeholder="Enter your email address">
         </div>
-
         <div class="input-group" style="margin-top: 20px;">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password">
         </div>
-
         <div class="forgot-password">
             <a href="#">Forgot password?</a>
         </div>
-
         <button type="submit" class="login-button">Log In</button>
-
         <div class="separator"><span>or</span></div>
-
         <div class="social-login-buttons">
             <a href="/oauth2/authorization/google" class="social-button" style="justify-content: center;">
                 <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s96-fcrop64=1,00000000ffffffff-rw" alt="Google" style="max-height: 24px; margin-right: 10px; vertical-align: middle;">
-                <span style="color:#000;">Sign in with Google</span>
+                <span style="color:#000;">Google</span>
             </a>
         </div>
-
         <div class="signup-link">
-            Don't have an account? <a href="/signup">Sign up</a>
+            <span>Don't have an account?</span> <a href="/signup">Sign up</a>
         </div>
+    </div>
+
+    <div class="offerings-container">
+        <h2>Platform Highlights</h2>
+        <ul>
+            <li>Practice Interviews</li>
+            <li>AI-Powered Interview Analysis</li>
+            <li>Personalized Feedback</li>
+            
+        </ul>
     </div>
 </body>
 </html>

@@ -1,2 +1,2 @@
 # Intelligent-Interview-Practice
-An interview practice platform for simulating real coding interviews with DSA questions, timed challenges, code evaluation, feedback and rating.
+An AI based interview practice platform for simulating real coding interviews with DSA questions, timed challenges, code evaluation, feedback and rating.

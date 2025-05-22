@@ -105,11 +105,12 @@ public class SignupController {
         // 2. If validation passes, proceed with user registration
         try {
 
-            String verificationToken = userService.storeUnverifiedUser(name, email, password);
-            emailService.sendVerificationEmail(email, verificationToken);
+            // String verificationToken = userService.storeUnverifiedUser(name, email, password);
+            // emailService.sendVerificationEmail(email, verificationToken);
 
             // Add a flash attribute for the success message.
             // Flash attributes are stored in the session for one redirect, then cleared.
+            userService.storeUnverifiedUser(name, email, password);
             return "redirect:/verification/pending"; // Redirect to the pending page
 
         } catch (IllegalArgumentException e) {

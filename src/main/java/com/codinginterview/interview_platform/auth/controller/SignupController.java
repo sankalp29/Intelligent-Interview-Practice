@@ -50,9 +50,46 @@ public class SignupController {
             @RequestParam("password") String password,
             @RequestParam("confirmPassword") String confirmPassword,
             Model model, // Used to add attributes for the current request (e.g., validation errors)
-            RedirectAttributes redirectAttributes) { // Used to add attributes for a redirect (e.g., success messages)
+            RedirectAttributes redirectAttributes, // Used to add attributes for a redirect (e.g., success messages)
+            CsrfToken csrfToken) { 
+            
+        
+        model.addAttribute("_csrf", csrfToken);
+        // Populate model with current values for retention
+        model.addAttribute("name", name);
+        model.addAttribute("email", email);
 
         // Flag to track if any validation errors occurred
+        boolean hasErrors = findValidationErrors(name, email, password, confirmPassword, model);
+
+        // If there are any validation errors, add the user's input back to the model and return to the signup page.
+        if (hasErrors) {
+            System.out.println("Validation errors encountered. Returning to signup form.");
+            return "signup"; // Stay on the signup page to display errors
+        }
+
+        // 2. If validation passes, proceed with user registration
+        try {
+            userService.storeUnverifiedUser(name, email, password);
+            return "redirect:/verification/pending"; // Redirect to the pending page
+
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("name", name);
+            model.addAttribute("email", email);
+            System.err.println("Signup error (IllegalArgumentException): " + e.getMessage());
+            return "signup"; // Stay on signup page on error
+        } catch (Exception e) {
+            model.addAttribute("error", "An unexpected error occurred during signup. Please try again."); // General error
+            model.addAttribute("name", name);
+            model.addAttribute("email", email);
+            System.err.println("Unexpected signup error: " + e.getMessage());
+            e.printStackTrace();
+            return "signup"; // Stay on signup page on error
+        }
+    }
+
+    private boolean findValidationErrors(String name, String email, String password, String confirmPassword, Model model) {
         boolean hasErrors = false;
 
         // 1. Server-side validation checks
@@ -93,39 +130,6 @@ public class SignupController {
             hasErrors = true;
         }
 
-        // If there are any validation errors, add the user's input back to the model and return to the signup page.
-        if (hasErrors) {
-            // Add back the input values so user doesn't lose them (except password for security)
-            model.addAttribute("name", name);
-            model.addAttribute("email", email);
-            System.out.println("Validation errors encountered. Returning to signup form.");
-            return "signup"; // Stay on the signup page to display errors
-        }
-
-        // 2. If validation passes, proceed with user registration
-        try {
-
-            // String verificationToken = userService.storeUnverifiedUser(name, email, password);
-            // emailService.sendVerificationEmail(email, verificationToken);
-
-            // Add a flash attribute for the success message.
-            // Flash attributes are stored in the session for one redirect, then cleared.
-            userService.storeUnverifiedUser(name, email, password);
-            return "redirect:/verification/pending"; // Redirect to the pending page
-
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("name", name);
-            model.addAttribute("email", email);
-            System.err.println("Signup error (IllegalArgumentException): " + e.getMessage());
-            return "signup"; // Stay on signup page on error
-        } catch (Exception e) {
-            model.addAttribute("error", "An unexpected error occurred during signup. Please try again."); // General error
-            model.addAttribute("name", name);
-            model.addAttribute("email", email);
-            System.err.println("Unexpected signup error: " + e.getMessage());
-            e.printStackTrace();
-            return "signup"; // Stay on signup page on error
-        }
+        return hasErrors;
     }
 }

@@ -49,4 +49,8 @@ public class User implements Serializable {
         this.verified = false;
         this.registeredOn = LocalDateTime.now();
     }
+
+    public void setVerified() {
+        this.verified = true;
+    }
 }
